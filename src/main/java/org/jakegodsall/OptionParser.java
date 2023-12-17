@@ -72,13 +72,23 @@ public class OptionParser {
 
     public void printValidOptions() {
         Set<Option> options = new HashSet<>(validOptions.values());
-        for (Option option : options) {
-            System.out.println(option);
-        }
+        String title = "Valid Options";
+        System.out.println(title);
+        System.out.println("_".repeat(title.length()) + "\n");
+        printOptions(options);
     }
 
     public void printSelectedOptions() {
+        String title = "Selected Options";
+        System.out.println(title);
+        System.out.println("_".repeat(title.length()) + "\n");
+        printOptions(selectedOptions);
+    }
 
+    private void printOptions(Set<Option> options) {
+        for (Option option : options) {
+            System.out.printf("-%-3s--%-10s %s\n", option.getPosixName(), option.getGnuName(), option.getDescription());
+        }
     }
 
 }
