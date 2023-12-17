@@ -1,15 +1,17 @@
 package org.jakegodsall;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class OptionParser {
     Map<String, Option> validOptions = new HashMap<>();
     Set<Option> selectedOptions = new HashSet<>();
 
-
     public OptionParser() {
-        this.validOptions = populateValidOptions();
+
+    }
+
+    public OptionParser(Map<String, Option> validOptions) {
+        this.validOptions = validOptions;
     }
 
     public void parseOptions(String[] args) {
@@ -24,50 +26,9 @@ public class OptionParser {
         return null;
     }
 
-    private Map<String, Option> populateValidOptions() {
-        Map<String, Option> validOptions = new HashMap<>();
-
-        Option bytesOption = new Option(
-          "c",
-                "bytes",
-                "The number of bytes in each input file is written to the standard output",
-                false
-        );
-
-        validOptions.put(bytesOption.getPosixName(), bytesOption);
-        validOptions.put(bytesOption.getGnuName(), bytesOption);
-
-        Option characterOption = new Option(
-                "m",
-                "chars",
-                "The number of characters in each input file is written to the standard output",
-                false
-        );
-
-        validOptions.put(characterOption.getPosixName(), characterOption);
-        validOptions.put(characterOption.getGnuName(), characterOption);
-
-        Option linesOption = new Option(
-                "l",
-                "lines",
-                "The number of lines in each input file is written to the standard output",
-                false
-        );
-
-        validOptions.put(linesOption.getPosixName(), linesOption);
-        validOptions.put(linesOption.getGnuName(), linesOption);
-
-        Option wordsOption = new Option(
-                "w",
-                "words",
-                "The number of words in each input file is written to the standard output",
-                false
-        );
-
-        validOptions.put(wordsOption.getPosixName(), wordsOption);
-        validOptions.put(wordsOption.getGnuName(), wordsOption);
-
-        return validOptions;
+    public void putValidOption(String posixName, String gnuName, Option option) {
+        validOptions.put(posixName, option);
+        validOptions.put(gnuName, option);
     }
 
     public void printValidOptions() {
